@@ -25,22 +25,6 @@ int main()
 	return 0;
 }
 
-void generate_array(int *arr, int width, int height)
-{
-	for(int j = 0; j < height; j++)
-		for(int i = 0; i < width; i++)
-			arr[j*width + i] = 2*j - 3*i;
-}
-
-void print_array(int *arr, int width, int height)
-{
-	for(int j = 0; j < height; j++) {
-		for(int i = 0; i < width; i++)
-			printf("%6d", arr[j*width + i]);
-		puts("");
-	}
-}
-
 void linear_search(int *arr, int width, int height, int val, int &i, int &j)
 {
 	for(j = 0; j < height; j++)
@@ -70,5 +54,21 @@ void linear_search_with_barrier(int *arr, int width, int height, int val, int &i
 		j = -1;
 	}
 
+}
+
+void generate_array(int *arr, int width, int height)
+{
+	for(int j = 0; j < height; j++)
+		for(int i = 0; i < width; i++)
+			arr[j*width + i] = 2*j - 3*i;
+}
+
+void print_array(int *arr, int width, int height)
+{
+	for(int j = 0; j < height; j++) {
+		for(int i = 0; i < width; i++)
+			printf("%6d", arr[j*width + i]);
+		puts("");
+	}
 }
 
