@@ -13,6 +13,7 @@ int lin(char *str, char *sub);
 int main()
 {
 	FILE *f = fopen(FILENAME, "r");
+	if(f == NULL) { puts("can't open the file"); return 1; }
 
 	size_t str_size = 32, str_len;
 	char *str = (char*)malloc(str_size*sizeof(char));
