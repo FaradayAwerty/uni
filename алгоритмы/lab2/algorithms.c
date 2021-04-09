@@ -48,13 +48,11 @@ int main()
 		str[str_len-- - 1] = '\0';
 		sub[sub_len-- - 1] = '\0';
 
-		printf("%s\t%6d\t%6d\t%6d\t%6d\n%s\n",
-				str,
+		printf("%8d\t%8d\t%8d\t%8d\n",
 				lin(str, sub),
 				bm(str, sub),
 				kmp(str, sub),
-				kr(str, sub),
-				sub);
+				kr(str, sub));
 	}
 	
 	free(str); free(sub); fclose(f);
