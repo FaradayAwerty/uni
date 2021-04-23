@@ -35,11 +35,11 @@ int main()
 	while(true) {
 		do {
 			str_len = getline(&str, &str_size, f);
-		} while(str_len == 1);
+		} while(str[0] == '\n');
 
 		do {
 			sub_len = getline(&sub, &sub_size, f);
-		} while(sub_len == 1);
+		} while(sub[0] == '\n');
 
 		if(str_len == -1 || sub_len == -1)
 			break;
