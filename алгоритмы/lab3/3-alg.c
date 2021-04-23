@@ -144,18 +144,23 @@ void merge_sort(long long *arr, long long istart, long long istop)
 
 void quick_sort(long long *arr, long long istart, long long istop)
 {
+	long long i = istart;
+	long long j = istop;
 	long long pivot = arr[(istart + istop)/2];
 
-	long long j = istop;
-	for(long long i = istart; i <= istop && i < j; i++)
-		if(arr[i] >= pivot) {
-			while(arr[j] >= pivot)
-				j--;
-			swap(&arr[i], &arr[j]);
-		}
+	while(i <= j) {
+		while(arr[i] < pivot)
+			i++;
+		while(arr[j] > pivot)
+			j--;
+		if(i <= j)
+			swap(&arr[i++], &arr[j--]);
+	}
 
-	quick_sort(arr, istart, j);
-	quick_sort(arr, j+1, istop);
+	if(j > istart)
+		quick_sort(arr, istart, j);
+	if(i < istop)
+		quick_sort(arr, i, istop);
 }
 
 void genarr(long long *arr, long long len, long long first_element, long long increment)
