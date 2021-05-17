@@ -1,8 +1,5 @@
 #include <stdio.h>
 
-// eights(3) = 888
-// eights(9) = 888888888
-//
 long long int eights(int n)
 {
 	long long int p = 0;
