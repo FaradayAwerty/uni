@@ -39,7 +39,7 @@ int main()
 	maze_get_start(maze, &start_x, &start_y);
 	maze_get_finish(maze, &finish_x, &finish_y);
 
-	maze_solve(maze, maze_get_width(maze), maze_get_height(maze),
+	bool solved = maze_solve(maze, maze_get_width(maze), maze_get_height(maze),
 			start_x, start_y, finish_x, finish_y);
 	maze_print(maze);
 
