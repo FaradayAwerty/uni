@@ -1,82 +1,98 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <limits.h>
 
-#define BLANK 0
-#define QUEEN 1
+struct Queen {
+	int x;
+	int y;
+};
 
-void solution(int *desk, int n, int q);
-void clear_all(int *desk, int n);
-void clear_row(int *desk, int n, int i);
-void clear_column(int *desk, int n, int i);
-void place_queen(int *desk, int n, int i, int j);
-void remove_queen(int *desk, int n, int i, int j);
-void print_desk(int *desk, int n);
+void solve(struct Queen *qs, int n, int i, int q, int *min);
+void print_queen(struct Queen q);
+void print_queens(struct Queen *qs, int n);
+void print_desk(struct Queen *qs, int n);
+int count_attacked_cells(struct Queen *qs, int n);
 
 int main()
 {
 	int n; printf("n = "); scanf("%d", &n);
-	int *desk = calloc(sizeof(int), n*n);
+	struct Queen *qs = (struct Queen*)calloc(sizeof(struct Queen), n);
+
+	int min = INT_MAX;
+	solve(qs, n, 0, 0, &min);
+	printf("%d\n", min);
 
 	return 0;
 }
 
-void solution(int *desk, int n, int q)
+void solve(struct Queen *qs, int n, int i, int q, int *min)
 {
+	if(q == n) {
+		int c = count_attacked_cells(qs, n);
+		if(c < *min) {
+			*min = c;
+			print_desk(qs, n);
+		}
 
-}
-
-// O(1)
-void place_queen(int *desk, int n, int i, int j)
-{
-	if(i < 0 || i >= n || j < 0 || j >= n)
 		return;
+	}
 
-	desk[i + n*j] = QUEEN;
-}
-
-// O(1)
-void remove_queen(int *desk, int n, int i, int j)
-{
-	if(i < 0 || i >= n || j < 0 || j >= n)
-		return;
-
-	desk[i + n*j] = BLANK;
-}
-
-// O(n^2)
-void print_desk(int *desk, int n)
-{
-	for(int i = 0; i < n*n; i++) {
-		printf("%d ", desk[i]);
-		if((i+1)%n == 0)
-			putchar('\n');
+	for(int j = i; j < n*n; j++) {
+		qs[q].x = j % n;
+		qs[q].y = j / n;
+		solve(qs, n, j+1, q+1, min);
 	}
 }
 
-// O(n)
-void clear_row(int *desk, int n, int i)
+void print_queens(struct Queen *qs, int n)
 {
-	if(i < 0 || i >= n)
-		return;
+	for(int i = 0; i < n; i++)
+		print_queen(qs[i]);
+	putchar('\n');
+}
+
+void print_queen(struct Queen q)
+{
+	printf("(%d %d) ", q.x, q.y);
+}
+
+int count_attacked_cells(struct Queen *qs, int n)
+{
+	int count = 0;
+	for(int i = 0; i < n; i++)
 	for(int j = 0; j < n; j++)
-		desk[j + i*n] = BLANK;
+	for(int k = 0; k < n; k++) 
+		if(qs[k].x == i || qs[k].y == j ||
+				abs(qs[k].x - j) == abs(qs[k].y - i)) {
+			count++;
+			break;
+		}
+	return count;
 }
 
-// O(n)
-void clear_column(int *desk, int n, int i)
+void print_desk(struct Queen *qs, int n)
 {
-	if(i < 0 || i >= n)
-		return;
-	for(int j = 0; j < n; j++)
-		desk[i + j*n] = BLANK;
+	for(int i = 0; i < n; i++) {
+		for(int j = 0; j < n; j++) {
+			bool queen_on_cell = false;
+			for(int k = 0; k < n; k++)
+				if(qs[k].x == j && qs[k].y == i)
+					queen_on_cell = true;
+			if(queen_on_cell)
+				putchar('1');
+			else
+				putchar('0');
+			putchar(' ');
+		}
+		putchar('\n');
+	}
+	putchar('\n');
 }
 
-// O(n^2)
-void clear_all(int *desk, int n)
+bool attack(struct Queen q1, struct Queen q2)
 {
-	for(int i = 0; i < n*n; i++)
-		desk[i] = BLANK;
+	if(q1.x == q2.x || q1.y == q2.y || abs(q1.x - q2.x) == abs(q1.y - q2.y))
+		return true;
+	return false;
 }
-
