@@ -38,4 +38,3 @@ void changearr(int *a, int l)
 	squareeven(a, l);
 	doubleodd(a, l);
 }
-

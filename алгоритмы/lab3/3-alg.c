@@ -179,7 +179,7 @@ void randarr(long long *arr, long long len, long long min, long long max)
 void print_arr(long long *arr, long long len)
 {
 	for(long long i = 0; i < len; i++) {
-		printf("%8ld ", arr[i]);
+		printf("%8lld ", arr[i]);
 		if(i%10 == 9)
 			putchar('\n');
 	}
@@ -189,7 +189,7 @@ void print_arr(long long *arr, long long len)
 void write_arr_to_file(long long *arr, long long len, FILE *f)
 {
 	for(long long i = 0; i < len; i++) {
-		fprintf(f, "%8ld ", arr[i]);
+		fprintf(f, "%8lld ", arr[i]);
 		if(i%10 == 9)
 			fputc('\n', f);
 	}
