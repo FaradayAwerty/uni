@@ -11,20 +11,35 @@ string get_word(int num, int n, int k);
 
 int main()
 {
-	int n; cout << "количество элементов в множестве, n = "; cin >> n;
-	int k; cout << "количество элементов в подмножестве, k = "; cin >> k;
+	int n;
+	cout << "количество элементов в множестве, n = ";
+	cin >> n;
 	cout << endl;
 
-	string word; cout << "слово, задающее " << k
-		<< "-элементное подмножество: "; cin >> word;
+	string word;
+	cout << "слово, задающее подмножество: ";
+	cin >> word;
+	if(word.length() != n) {
+		cout << "в множестве должно быть "
+			<< n << " элементов !!!" << endl;
+		return 1;
+	}
 	cout << "его номер: " << get_number(word) << endl << endl;
 
+	int k;
+	cout << "количество элементов в подмножестве, k = ";
+	cin >> k;
 
-	int num; cout << "номер " << k
-		<< "-элементного подмножества: "; cin >> num;
+	int num;
+	cout << "номер подмножества: ";
+	cin >> num;
+
 	cout << "слово, которое ему соответствует: "
 		<< get_word(num, n, k) << endl << endl;
 
+	cout << "все слова, задающие " << k
+		<< "-элементные подмножества, в лексикографическом порядке:"
+		<< endl;
 	print_sets(n, k, "");
 
 	return 0;
