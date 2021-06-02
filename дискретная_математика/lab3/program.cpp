@@ -11,35 +11,20 @@ string get_word(int num, int n, int k);
 
 int main()
 {
-	int n;
-	cout << "количество элементов в множестве, n = ";
-	cin >> n;
-	cout << endl;
+	int n, k, num; string word;
 
-	string word;
-	cout << "слово, задающее подмножество: ";
-	cin >> word;
-	if(word.length() != n) {
-		cout << "в множестве должно быть "
-			<< n << " элементов !!!" << endl;
-		return 1;
-	}
-	cout << "его номер: " << get_number(word) << endl << endl;
+	cout << "слово, задающее подмножество: "; cin >> word;
+	cout << "его номер: " << get_number(word) << endl;
 
-	int k;
-	cout << "количество элементов в подмножестве, k = ";
-	cin >> k;
+	cout << "количество элементов в множестве, n = "; cin >> n;
+	cout << "количество элементов в подмножестве, k = "; cin >> k;
+	cout << "номер подмножества: "; cin >> num;
 
-	int num;
-	cout << "номер подмножества: ";
-	cin >> num;
-
-	cout << "слово, которое ему соответствует: "
-		<< get_word(num, n, k) << endl << endl;
+	cout << "слово, которое ему соответствует: ";
+	cout << get_word(num, n, k) << endl;
 
 	cout << "все слова, задающие " << k
-		<< "-элементные подмножества, в лексикографическом порядке:"
-		<< endl;
+		<< "-элементные подмножества, в лексикографическом порядке:\n";
 	print_sets(n, k, "");
 
 	return 0;
@@ -74,17 +59,13 @@ int get_number(string word)
 
 void print_sets(int n, int k, string s)
 {
-	if(n == 0) {
+	if(n == 0)
 		cout << s << endl;
-		return;
-	}
-
-	if(n > k) {
-		print_sets(n - 1, k, s + "0");
-	} 
-
-	if(k > 0) {
-		print_sets(n - 1, k - 1, s + "1");
+	else {
+		if(n > k)
+			print_sets(n - 1, k, s + "0");
+		if(k > 0)
+			print_sets(n - 1, k - 1, s + "1");
 	}
 }
 
