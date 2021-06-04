@@ -34,11 +34,11 @@ void print_field();
 void print_weights();
 void print_path();
 void calc_weights(int i, int j);
+void calc_path();
 void set_weight(int i, int j, int val);
 int get_weight(int i, int j);
 int get_cost(int i, int j, int dir);
 int min(int a, int b);
-void calc_path();
 
 int main()
 {
