@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int calc_minor(int **matrix, int n, int i, int j);
 int calc_det(int **matrix, int n);
 void calc_adj(int **matrix_input, int **matrix_output, int n);
 void print_matrix(int **matrix, int n);
@@ -13,9 +14,14 @@ int main()
 	int **matrix = (int **)calloc(sizeof(int *), n);
 	for(int i = 0; i < n; matrix[i++] = (int *)calloc(sizeof(int), n));
 
+	int **adj_matrix = (int **)calloc(sizeof(int *), n);
+	for(int i = 0; i < n; adj_matrix[i++] = (int *)calloc(sizeof(int), n));
+
 	pascal_triangle(matrix, n);
 	print_matrix(matrix, n);
-	printf("%d\n", calc_det(matrix, n));
+
+	calc_adj(matrix, adj_matrix, n);
+	print_matrix(adj_matrix, n);
 
 	return 0;
 }
@@ -41,6 +47,23 @@ int calc_det(int **matrix, int n)
 	return det;
 }
 
+int calc_minor(int **matrix, int n, int i, int j)
+{
+	if(n == 2)
+		return matrix[1 - i][1 - j];
+
+	int **minor = (int **)calloc(sizeof(int *), n - 1);
+	for(int k = 0; k < n - 1; k++)
+		minor[k] = (int *)calloc(sizeof(int), n - 1);
+
+	for(int ii = 0; ii < n - 1; ii++)
+		for(int jj = 0; jj < n - 1; jj++)
+			minor[ii][jj]
+				= matrix[ii < i ? ii : ii + 1][jj < j ? jj : jj + 1];
+
+	return calc_det(minor, n - 1);
+}
+
 void print_matrix(int **matrix, int n)
 {
 	for(int i = 0; i < n; i++) {
@@ -48,6 +71,7 @@ void print_matrix(int **matrix, int n)
 			printf("\t%d", matrix[i][j]);
 		putchar('\n');
 	}
+	putchar('\n');
 }
 
 void randomize_matrix(int **matrix, int n)
@@ -70,6 +94,9 @@ void pascal_triangle(int **matrix, int n)
 
 void calc_adj(int **matrix_input, int **matrix_output, int n)
 {
-
+		for(int i = 0; i < n; i++)
+			for(int j = 0; j < n; j++)
+				matrix_output[j][i] = ((i+j) % 2 ? -1 : 1) *
+					calc_minor(matrix_input, n, i, j);
 }
 
