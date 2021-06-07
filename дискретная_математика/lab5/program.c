@@ -18,6 +18,7 @@ int main()
 	int **adj_matrix = (int **)calloc(sizeof(int *), n);
 	for(int i = 0; i < n; adj_matrix[i++] = (int *)calloc(sizeof(int), n));
 
+	//pascal_triangle(matrix, n);
 	divisors_triangle(matrix, n);
 	print_matrix(matrix, n);
 
