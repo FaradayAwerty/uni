@@ -7,6 +7,7 @@ void calc_adj(int **matrix_input, int **matrix_output, int n);
 void print_matrix(int **matrix, int n);
 void randomize_matrix(int **matrix, int n);
 void pascal_triangle(int **matrix, int n);
+void divisors_triangle(int **matrix, int n);
 
 int main()
 {
@@ -17,7 +18,7 @@ int main()
 	int **adj_matrix = (int **)calloc(sizeof(int *), n);
 	for(int i = 0; i < n; adj_matrix[i++] = (int *)calloc(sizeof(int), n));
 
-	pascal_triangle(matrix, n);
+	divisors_triangle(matrix, n);
 	print_matrix(matrix, n);
 
 	calc_adj(matrix, adj_matrix, n);
@@ -94,9 +95,16 @@ void pascal_triangle(int **matrix, int n)
 
 void calc_adj(int **matrix_input, int **matrix_output, int n)
 {
-		for(int i = 0; i < n; i++)
-			for(int j = 0; j < n; j++)
-				matrix_output[j][i] = ((i+j) % 2 ? -1 : 1) *
-					calc_minor(matrix_input, n, i, j);
+	for(int i = 0; i < n; i++)
+		for(int j = 0; j < n; j++)
+			matrix_output[j][i] = ((i+j) % 2 ? -1 : 1) *
+				calc_minor(matrix_input, n, i, j);
+}
+
+void divisors_triangle(int **matrix, int n)
+{
+	for(int i = 0; i < n; i++)
+		for(int j = 0; j < n; j++)
+			matrix[i][j] = (i+1)%(j+1) == 0 ? 1 : 0;
 }
 
