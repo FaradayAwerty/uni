@@ -1,61 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
-struct FloatStackType {
-	float data;
-	struct FloatStackType *next;
+struct IntStackType {
+	int data;
+	struct IntStackType *next;
 };
 
-typedef struct FloatStackType FloatStack;
+typedef struct IntStackType Stack;
 
-FloatStack *push(FloatStack *stack, float f)
+Stack *push(Stack *stack, int data)
 {
-	FloatStack *newStack = malloc(sizeof(FloatStack));
-	newStack->data = f;
-	newStack->next = stack;
-	return newStack;
+	Stack *_stack = malloc(sizeof(Stack));
+	_stack->data = data;
+	_stack->next = stack;
+	return _stack;
 }
 
-float pop(FloatStack **stack)
+float pop(Stack **stack)
 {
-	float data = (*stack)->data;
+	int data = (*stack)->data;
 
-	FloatStack *_stack = *stack;
+	Stack *_stack = *stack;
 	*stack = (*stack)->next;
 	free(_stack);
 
 	return data;
 }
 
-float eval(char *string)
-{
-	FloatStack *stack = NULL;
+float eval(char *string) {
 
-	for(int i = 0; string[i] != '\0';) {
+	for(int i = 0; string[i] != '\0'; i++) {
 
-		if(string[i] == '+' && stack != NULL && stack->next != NULL)
-			;
-		if(string[i] == '-' && stack != NULL && stack->next != NULL)
-			;
-		if(string[i] == '*' && stack != NULL && stack->next != NULL)
-			;
-		if(string[i] == '/' && stack != NULL && stack->next != NULL)
-			;
-		if(string[i] == '%' && stack != NULL && stack->next != NULL)
-			;
-		if(string[i] == '^' && stack != NULL && stack->next != NULL)
-			;
-
-		float num = 0, p = 1, sign = 1;
-		if(string[i++] == '-')
-			sign *= -1;
-		while('0' <= string[i] && string[i] <= '9')
-			num = num*10 + string[i++] - '0';
-		if(string[i] == '.')
-			while('0' <= string[++i] && string[i] <= '9')
-				num = num + (string[i] - '0') * (p *= 0.1);
-		stack = push(stack, num);
 	}
 
 	return 0;
@@ -75,6 +52,8 @@ int main(int argc, char *argv[])
 
 	char *string = argv[1];
 
-	eval("123.4 12 1233.45 1 12.001 12.0");
+	Stack *stack = push(NULL, 1);
+
+	return 0;
 }
 
