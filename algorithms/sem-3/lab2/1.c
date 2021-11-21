@@ -6,41 +6,62 @@ struct node {
 	struct node *link;
 };
 
-void insert_at_end(struct node *head, int data);
+void insert(struct node *node, int data);
 void printlist(struct node *head);
 
 int main()
 {
-	struct node *head = malloc(sizeof(struct node));
-	head->data = 11;
-	head->link = NULL;
-	insert_at_end(head, 22);
-	insert_at_end(head, 33);
-	insert_at_end(head, 33);
-	insert_at_end(head, 44);
-	insert_at_end(head, 55);
-	insert_at_end(head, 56);
-	
+	int input_number;
+	struct node *head = NULL;
+
+	puts("Введите несколько целых чисел");
+	puts("\tпримечание: 0 завершает ввод\n");
+
+	while(1) {
+		scanf("%d", &input_number);
+
+		if(input_number == 0) {
+			break;
+		} else if(head == NULL) {
+			head = malloc(sizeof(struct node));
+			head->data = input_number;
+			head->link = NULL;
+		} else {
+			//tail->link = malloc(sizeof(struct node));
+			//tail = tail->link;
+			//tail->data = input_number;
+			//tail->link = NULL;
+			insert(head, input_number);
+		}
+
+	}
+
 	printlist(head);
 
 	return 0;
 }
 
-void insert_at_end(struct node *head, int data)
+void insert(struct node *head, int data)
 {
-	// can't do anything if head is NULL
 	if(head == NULL)
 		return;
 
-	struct node *temp = malloc(sizeof(struct node));
-	temp->data = data;
-	temp->link = NULL;
-
 	struct node *ptr = head;
-	while(ptr->link != NULL)
+	while(ptr->link != NULL && data > ptr->data) {
 		ptr = ptr->link;
+	}
 
-	ptr->link = temp;
+	struct node *new = malloc(sizeof(struct node));
+	new->data = data;
+
+	new->link = ptr->link;
+	ptr->link = new; 
+
+	if(ptr->data > data) {
+		int t = ptr->data;
+		ptr->data = new->data;
+		new->data = t;
+	}
 }
 
 void printlist(struct node *head)
