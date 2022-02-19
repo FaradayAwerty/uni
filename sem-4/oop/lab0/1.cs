@@ -13,10 +13,10 @@ public class MainClass {
 						Convert.ToInt32(Console.ReadLine()),
 						Convert.ToInt32(Console.ReadLine())));
 		}
-
 	}
 
 	public static Int32 sum_of_squares(Int32 a, Int32 b) {
 		return a*a + b*b;
 	}
 }
+
