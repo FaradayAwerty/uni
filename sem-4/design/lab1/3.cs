@@ -33,8 +33,6 @@ class Task3 {
 		while(ifm < ilm) {
 			
 		}
-
-
 	}
 }
 
