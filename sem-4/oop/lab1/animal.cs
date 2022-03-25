@@ -21,11 +21,16 @@ public class Animal : AnimalBase {
 		this.diet = diet;
 	}
 
-	new public string ToString() {
+	public override string ToString() {
 		return base.ToString() + ", " + name + ", " + diet;
 	}
 
-	public bool Compare(Animal a) {
+	public override bool Compare(AnimalBase ab) {
+
+		if(ab.GetType() != this.GetType())
+			return false;
+		Animal a = (Animal)ab;
+
 		return base.Compare(a) && (a.name == name) && (a.diet == diet);
 	}
 }

@@ -23,13 +23,17 @@ public class Artiodactyl : AnimalBase {
 		this.strength = strength;
 	}
 
-	new public string ToString() {
+	public override string ToString() {
 		return base.ToString() + ", " + hoofSize.ToString() + ", " + strength.ToString();
 	}
 
-	public bool Compare(Artiodactyl b) {
-		return base.Compare(b) && (b.hoofSize == hoofSize) && (b.strength == strength);
-	}
+	public override bool Compare(AnimalBase ab) {
 
+		if(ab.GetType() != this.GetType())
+			return false;
+		Artiodactyl a = (Artiodactyl)ab;
+
+		return base.Compare(a) && (a.hoofSize == hoofSize) && (a.strength == strength);
+	}
 }
 

@@ -23,11 +23,16 @@ public class Bird : AnimalBase {
 		this.wingSize = wingSize;
 	}
 
-	new public string ToString() {
+	public override string ToString() {
 		return base.ToString() + ", " + flightHeight.ToString() + ", " + wingSize.ToString();
 	}
 
-	public bool Compare(Bird b) {
+	public override bool Compare(AnimalBase ab) {
+
+		if(ab.GetType() != this.GetType())
+			return false;
+		Bird b = (Bird)ab;
+
 		return base.Compare(b) && (b.flightHeight == flightHeight) && (b.wingSize == wingSize);
 	}
 

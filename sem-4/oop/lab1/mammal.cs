@@ -21,11 +21,17 @@ public class Mammal : AnimalBase {
 		this.milkAmount = milkAmount;
 	}
 
-	new public string ToString() {
+	public override string ToString() {
 		return base.ToString() + ", " + breastSize + ", " + milkAmount;
 	}
 
-	public bool Compare(Mammal m) {
+	public override bool Compare(AnimalBase ab) {
+
+		if(ab.GetType() != this.GetType())
+			return false;
+		Mammal m = (Mammal)ab;
+
 		return base.Compare(m) && (m.breastSize == breastSize) && (m.milkAmount == milkAmount);
 	}
 }
+

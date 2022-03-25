@@ -29,11 +29,11 @@ public class AnimalBase {
 		this.weight = weight;
 	}
 
-	new public string ToString() {
+	public override string ToString() {
 		return x.ToString() + ", " + y.ToString() + ", " + z.ToString() + ", " + weight.ToString();
 	}
 
-	public bool Compare(AnimalBase a) {
+	public virtual bool Compare(AnimalBase a) {
 		return (a.x == x) && (a.y == y) && (a.z == z) && (a.weight == weight);
 	}
 }

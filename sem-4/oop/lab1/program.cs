@@ -22,25 +22,42 @@ public class Program {
 					isRunning = false;
 					break;
 				case "print":
-					for(AnimalBase ab : animals) {
-						Console.WriteLine(ab.ToString());
+					foreach(AnimalBase ab in animals) {
+						Console.WriteLine(ab.GetType().ToString()
+								+ ": " + ab.ToString());
 					}
 					break;
 				case "animal":
-					animals.Add(new Animal(ReadDouble("x = "), ReadDouble("y = "), ReadDouble("z = "), ReadDouble("weight = "),
-							ReadString("name = "), ReadString("diet = ")));
+					animals.Add(new Animal(ReadDouble("x = "),
+								ReadDouble("y = "),
+								ReadDouble("z = "),
+								ReadDouble("weight = "),
+								ReadString("name = "),
+								ReadString("diet = ")));
 					break;
 				case "bird":
-					animals.Add(new Bird(ReadDouble("x = "), ReadDouble("y = "), ReadDouble("z = "), ReadDouble("weight = "),
-							ReadDouble("flight height = "), ReadDouble("wing size = ")));
+					animals.Add(new Bird(ReadDouble("x = "),
+								ReadDouble("y = "),
+								ReadDouble("z = "),
+								ReadDouble("weight = "),
+								ReadDouble("flight height = "),
+								ReadDouble("wing size = ")));
 					break;
 				case "mammal":
-					animals.Add(new Bird(ReadDouble("x = "), ReadDouble("y = "), ReadDouble("z = "), ReadDouble("weight = "),
-							ReadDouble("breast size = "), ReadDouble("milk amount = ")));
+					animals.Add(new Bird(ReadDouble("x = "),
+								ReadDouble("y = "),
+								ReadDouble("z = "),
+								ReadDouble("weight = "),
+								ReadDouble("breast size = "),
+								ReadDouble("milk amount = ")));
 					break;
 				case "artiodactyl":
-					animals.Add(new Artiodactyl(ReadDouble("x = "), ReadDouble("y = "), ReadDouble("z = "), ReadDouble("weight = "),
-							ReadDouble("hoof size = "), ReadDouble("strength = ")));
+					animals.Add(new Artiodactyl(ReadDouble("x = "),
+								ReadDouble("y = "),
+								ReadDouble("z = "),
+								ReadDouble("weight = "),
+								ReadDouble("hoof size = "),
+								ReadDouble("strength = ")));
 					break;
 				default:
 					break;
