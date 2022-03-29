@@ -12,7 +12,8 @@ public class Program {
 		Console.WriteLine("\tbird - добавить птицу");
 		Console.WriteLine("\tartiodactyl - добавить парнокопытное");
 		Console.WriteLine("\tmammal - добавить млекопитающее");
-		Console.WriteLine("\tprint - напечатать всех животных");
+		Console.WriteLine("\tprint - напечатать всех животных (кратко)");
+		Console.WriteLine("\tPRINT - напечатать всех животных (полностью)");
 		Console.WriteLine("\texit - выход");
 	
 		bool isRunning = true;
@@ -24,46 +25,83 @@ public class Program {
 				case "print":
 					foreach(AnimalBase ab in animals) {
 						Console.WriteLine(ab.GetType().ToString()
+								+ ": " + ab.ShortDescription());
+					}
+					break;
+				case "PRINT":
+					foreach(AnimalBase ab in animals) {
+						Console.WriteLine(ab.GetType().ToString()
 								+ ": " + ab.ToString());
 					}
 					break;
 				case "animal":
-					animals.Add(new Animal(ReadDouble("x = "),
+					Animal a = new Animal(ReadDouble("x = "),
 								ReadDouble("y = "),
 								ReadDouble("z = "),
 								ReadDouble("weight = "),
 								ReadString("name = "),
-								ReadString("diet = ")));
+								ReadString("diet = "));
+					if(IsPresent(animals, a))
+						Console.WriteLine("такая штучка уже имеется в списке!");
+					else
+						animals.Add(a);
 					break;
 				case "bird":
-					animals.Add(new Bird(ReadDouble("x = "),
+					Bird b = new Bird(ReadDouble("x = "),
 								ReadDouble("y = "),
 								ReadDouble("z = "),
 								ReadDouble("weight = "),
+								ReadString("name = "),
+								ReadString("diet = "),
 								ReadDouble("flight height = "),
-								ReadDouble("wing size = ")));
+								ReadDouble("wing size = "));
+					if(IsPresent(animals, b))
+						Console.WriteLine("такая штучка уже имеется в списке!");
+					else
+						animals.Add(b);
 					break;
 				case "mammal":
-					animals.Add(new Bird(ReadDouble("x = "),
+					Mammal m = new Mammal(ReadDouble("x = "),
 								ReadDouble("y = "),
 								ReadDouble("z = "),
 								ReadDouble("weight = "),
+								ReadString("name = "),
+								ReadString("diet = "),
 								ReadDouble("breast size = "),
-								ReadDouble("milk amount = ")));
+								ReadDouble("milk amount = "));
+					if(IsPresent(animals, m))
+						Console.WriteLine("такая штучка уже имеется в списке!");
+					else
+						animals.Add(m);
 					break;
 				case "artiodactyl":
-					animals.Add(new Artiodactyl(ReadDouble("x = "),
+					Artiodactyl ar = new Artiodactyl(ReadDouble("x = "),
 								ReadDouble("y = "),
 								ReadDouble("z = "),
 								ReadDouble("weight = "),
+								ReadString("name = "),
+								ReadString("diet = "),
+								ReadDouble("breast size = "),
+								ReadDouble("milk amount = "),
 								ReadDouble("hoof size = "),
-								ReadDouble("strength = ")));
+								ReadDouble("strength = "));
+					if(IsPresent(animals, ar))
+						Console.WriteLine("такая штучка уже имеется в списке!");
+					else
+						animals.Add(ar);
 					break;
 				default:
 					break;
 			}
 		}
 
+	}
+
+	public static bool IsPresent(List<AnimalBase> list, AnimalBase elem) {
+			foreach(AnimalBase ab in list)
+				if(ab.Compare(elem))
+					return true;
+			return false;
 	}
 
 	public static double ReadDouble(string message) {
