@@ -6,7 +6,8 @@
 
 #include "digraph.h"
 
-digraph *digraph_create(int numnodes) {
+digraph *digraph_create(int numnodes)
+{
 	digraph *g = (digraph *)malloc(sizeof(*g));
 	if(g == NULL)
 		return NULL;
@@ -30,7 +31,8 @@ digraph *digraph_create(int numnodes) {
 	return g;
 }
 
-void digraph_destroy(digraph *g) {
+void digraph_destroy(digraph *g)
+{
 	if(g == NULL)
 		return;
 	if(g->adjmatrix == NULL) {
@@ -44,7 +46,8 @@ void digraph_destroy(digraph *g) {
 	free(g);
 }
 
-void digraph_print(digraph *g) {
+void digraph_print(digraph *g)
+{
 	puts("digraph {");
 	for(int i = 0; i < g->numnodes; i++)
 		for(int j = 0; j < g->numnodes; j++)
@@ -53,7 +56,8 @@ void digraph_print(digraph *g) {
 	puts("}");
 }
 
-bool digraph_edge_add(digraph *g, int node_i, int node_j) {
+bool digraph_edge_add(digraph *g, int node_i, int node_j)
+{
 	assert(g != NULL && g->adjmatrix != NULL);
 	assert(0 <= node_i && node_i < g->numnodes);
 	assert(0 <= node_j && node_j < g->numnodes);
@@ -66,7 +70,8 @@ bool digraph_edge_add(digraph *g, int node_i, int node_j) {
 	return true;
 }
 
-bool digraph_edge_exists(digraph *g, int node_i, int node_j) {
+bool digraph_edge_exists(digraph *g, int node_i, int node_j)
+{
 	assert(g != NULL && g->adjmatrix != NULL);
 	assert(0 <= node_i && node_i < g->numnodes);
 	assert(0 <= node_j && node_j < g->numnodes);
