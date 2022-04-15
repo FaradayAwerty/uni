@@ -14,6 +14,7 @@ public class Program {
 		Console.WriteLine("\tmammal - добавить млекопитающее");
 		Console.WriteLine("\tprint - напечатать всех животных (кратко)");
 		Console.WriteLine("\tPRINT - напечатать всех животных (полностью)");
+		Console.WriteLine("\tguids - напечатать guid всех животных");
 		Console.WriteLine("\texit - выход");
 	
 		bool isRunning = true;
@@ -21,6 +22,11 @@ public class Program {
 			switch(Console.ReadLine()) {
 				case "exit":
 					isRunning = false;
+					break;
+				case "guids":
+					foreach(AnimalBase ab in animals) {
+						Console.WriteLine(ab.guid);
+					}
 					break;
 				case "print":
 					foreach(AnimalBase ab in animals) {

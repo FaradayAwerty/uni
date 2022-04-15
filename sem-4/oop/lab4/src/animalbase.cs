@@ -1,6 +1,9 @@
 
-public abstract class AnimalBase : IHasGuid {
+using System;
 
+public abstract class AnimalBase : IHasGUID
+{
+	private Guid _guid;
 	private double x, y, z, weight;
 
 	public double X {
@@ -27,6 +30,8 @@ public abstract class AnimalBase : IHasGuid {
 		this.y = y;
 		this.z = z;
 		this.weight = weight;
+
+		_guid = Guid.NewGuid();
 	}
 
 	public virtual bool Compare(AnimalBase a) {
@@ -43,6 +48,12 @@ public abstract class AnimalBase : IHasGuid {
 
 	public virtual string ItemName() {
 		return "Unknown";
+	}
+
+	public Guid guid {
+		get {
+			return _guid;
+		}
 	}
 }
 
