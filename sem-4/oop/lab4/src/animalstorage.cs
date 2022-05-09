@@ -15,4 +15,6 @@ public class AnimalStorage {
 		mammals = new List<Mammal>();
 		birds = new List<Bird>();
 	}
+
 }
+
